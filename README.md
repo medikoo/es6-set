@@ -55,7 +55,7 @@ var iterator = set.values();
 iterator.next(); // { done: false, value: 'raz' }
 iterator.next(); // { done: false, value: {} }
 iterator.next(); // { done: false, value: 'foo' }
-iterator.next(); // { done: true, value: 'undefined }
+iterator.next(); // { done: true, value: undefined }
 
 set.clear(); // undefined
 set.size; // 0
