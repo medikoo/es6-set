@@ -3,13 +3,13 @@
 
 ### Usage
 
-If you want to make sure your environement implements `Set`:
+If you want to make sure your environement implements `Set`, do:
 
 ```javascript
 require('es6-set/implement');
 ```
 
-If you'd like to use native version if it exists and fallback to polyfill if it doesn't, but without implementing `Set` into global scope, do:
+If you'd like to use native version when it exists and fallback to polyfill if it doesn't, but without implementing `Set` on global scope, do:
 
 ```javascript
 var Set = require('es6-set');
@@ -30,15 +30,15 @@ var Set = require('es6-set');
 
 var set = new Set(['raz', 'dwa', {}]);
 
-set.size; // 3
-set.has('raz'); // true
-set.has('foo'); // false
-set.add('foo'); // set
-set.size // 4
-set.has('foo'); // true
-set.has('dwa'); // true
+set.size;          // 3
+set.has('raz');    // true
+set.has('foo');    // false
+set.add('foo');    // set
+set.size           // 4
+set.has('foo');    // true
+set.has('dwa');    // true
 set.delete('dwa'); // true
-set.size; // 3
+set.size;          // 3
 
 set.forEach(function (value) {
  // 'raz', {}, 'foo' iterated
@@ -60,6 +60,7 @@ iterator.next(); // { done: true, value: 'undefined }
 set.clear(); // undefined
 set.size; // 0
 ```
+
 ### Installation
 #### NPM
 
