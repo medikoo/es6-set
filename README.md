@@ -3,7 +3,7 @@
 
 ### Usage
 
-If you want to make sure your environement implements `Set`, do:
+If you want to make sure your environment implements `Set`, do:
 
 ```javascript
 require('es6-set/implement');
