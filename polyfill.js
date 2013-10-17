@@ -30,7 +30,6 @@ module.exports = Set = function (/*iterable, comparator*/) {
 };
 
 ee(Object.defineProperties(Set.prototype, {
-	constructor: d(Set),
 	add: d(function (value) {
 		if (this.has(value)) return this;
 		this.emit('_add', this.__setData__.push(value) - 1);
