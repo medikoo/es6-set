@@ -1,15 +1,14 @@
 'use strict';
 
 var clear       = require('es5-ext/object/clear')
-  , callable    = require('es5-ext/object/valid-callable')
   , d           = require('d/d')
   , getIterator = require('es6-iterator/get')
   , forOf       = require('es6-iterator/for-of')
   , Set         = require('../polyfill')
   , Iterator    = require('./_iterator')
 
-  , isArray = Array.isArray, call = Function.prototype.call
-  , create = Object.create, defineProperties = Object.defineProperties
+  , isArray = Array.isArray, create = Object.create
+  , defineProperties = Object.defineProperties
   , hasOwnProperty = Object.prototype.hasOwnProperty
   , PrimitiveSet;
 
