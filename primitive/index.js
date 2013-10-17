@@ -55,16 +55,6 @@ PrimitiveSet.prototype = Object.create(Set.prototype, {
 		return true;
 	}),
 	entries: d(function () { return new Iterator(this, 'key+value'); }),
-	forEach: d(function (cb/*, thisArg*/) {
-		var thisArg = arguments[1], iterator, result;
-		callable(cb);
-		iterator = this.values();
-		result = iterator.next();
-		while (!result.done) {
-			call.call(cb, thisArg, result.value, result.value, this);
-			result = iterator.next();
-		}
-	}),
 	has: d(function (value) {
 		var key = this._serialize(value);
 		return hasOwnProperty.call(this.__setData__, key);
