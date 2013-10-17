@@ -10,7 +10,7 @@ var callable    = require('es5-ext/object/valid-callable')
 
   , isArray = Array.isArray
   , call = Function.prototype.call, defineProperty = Object.defineProperty
-  , Set, values;
+  , Set, getValues;
 
 module.exports = Set = function (/*iterable, comparator*/) {
 	var iterable = arguments[0], comparator = arguments[1];
@@ -60,9 +60,9 @@ ee(Object.defineProperties(Set.prototype, {
 	has: d(function (value) {
 		return (this.__setData__.eIndexOf(value) !== -1);
 	}),
-	keys: d(values = function () { return new Iterator(this); }),
+	keys: d(getValues = function () { return this.values(); }),
 	size: d.gs(function () { return this.__setData__.length; }),
-	values: d(values),
-	'@@iterator': d(values),
+	values: d(function () { return new Iterator(this); }),
+	'@@iterator': d(getValues),
 	toString: d(function () { return '[object Set]'; })
 }));
