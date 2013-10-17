@@ -3,19 +3,19 @@
 var clear       = require('es5-ext/object/clear')
   , callable    = require('es5-ext/object/valid-callable')
   , d           = require('d/d')
-  , ee          = require('event-emitter/lib/core')
   , getIterator = require('es6-iterator/get')
   , forOf       = require('es6-iterator/for-of')
+  , Set         = require('../polyfill')
   , Iterator    = require('./_iterator')
 
   , isArray = Array.isArray, call = Function.prototype.call
   , create = Object.create, defineProperties = Object.defineProperties
   , hasOwnProperty = Object.prototype.hasOwnProperty
-  , Set, values;
+  , PrimitiveSet;
 
-module.exports = Set = function (/*iterable*/) {
+module.exports = PrimitiveSet = function (/*iterable*/) {
 	var iterable = arguments[0];
-	if (!(this instanceof Set)) return new Set(iterable);
+	if (!(this instanceof PrimitiveSet)) return new PrimitiveSet(iterable);
 	if (this.__setData__ !== undefined) {
 		throw new TypeError(this + " cannot be reinitialized");
 	}
@@ -30,8 +30,8 @@ module.exports = Set = function (/*iterable*/) {
 	forOf(iterable, function (value) { this.add(value); }, this);
 };
 
-ee(defineProperties(Set.prototype, {
-	constructor: d(Set),
+PrimitiveSet.prototype = Object.create(Set.prototype, {
+	constructor: d(PrimitiveSet),
 	_serialize: d(String),
 	add: d(function (value) {
 		var key = this._serialize(value);
@@ -69,9 +69,6 @@ ee(defineProperties(Set.prototype, {
 		var key = this._serialize(value);
 		return hasOwnProperty.call(this.__setData__, key);
 	}),
-	keys: d(values = function () { return new Iterator(this); }),
 	size: d.gs(function () { return this.__size__; }),
-	values: d(values),
-	'@@iterator': d(values),
-	toString: d(function () { return '[object Set]'; })
-}));
+	values: d(function () { return new Iterator(this); })
+});
