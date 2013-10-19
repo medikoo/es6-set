@@ -31,9 +31,13 @@ module.exports = PrimitiveSet = function (/*iterable*/) {
 
 PrimitiveSet.prototype = Object.create(Set.prototype, {
 	constructor: d(PrimitiveSet),
-	_serialize: d(String),
+	_serialize: d(function (value) {
+		if (value && (typeof value.toString !== 'function')) return;
+		return String(value);
+	}),
 	add: d(function (value) {
 		var key = this._serialize(value);
+		if (key == null) throw new TypeError(value + " cannot be serialized");
 		if (hasOwnProperty.call(this.__setData__, key)) return this;
 		this.__setData__[key] = value;
 		++this.__size__;
@@ -47,6 +51,7 @@ PrimitiveSet.prototype = Object.create(Set.prototype, {
 	}),
 	delete: d(function (value) {
 		var key = this._serialize(value);
+		if (key == null) return false;
 		if (!hasOwnProperty.call(this.__setData__, key)) return false;
 		delete this.__setData__[key];
 		--this.__size__;
@@ -56,6 +61,7 @@ PrimitiveSet.prototype = Object.create(Set.prototype, {
 	entries: d(function () { return new Iterator(this, 'key+value'); }),
 	has: d(function (value) {
 		var key = this._serialize(value);
+		if (key == null) return false;
 		return hasOwnProperty.call(this.__setData__, key);
 	}),
 	size: d.gs(function () { return this.__size__; }),
