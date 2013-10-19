@@ -16,6 +16,7 @@ module.exports = function (T, a) {
 	a(set.has(x), true, "Add");
 	a(set.size, 4, "Add: Size");
 	a(set.delete('else'), false, "Delete: false");
+	a(set.get('raz'), 'raz', "Get");
 
 	arr.push(x);
 	set.forEach(function () {

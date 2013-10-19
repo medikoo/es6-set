@@ -59,5 +59,6 @@ PrimitiveSet.prototype = Object.create(Set.prototype, {
 		return hasOwnProperty.call(this.__setData__, key);
 	}),
 	size: d.gs(function () { return this.__size__; }),
+	get: d(function (key) { return this.__setData__[key]; }),
 	values: d(function () { return new Iterator(this); })
 });
