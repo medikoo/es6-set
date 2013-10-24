@@ -64,5 +64,6 @@ ee(Object.defineProperties(Set.prototype, {
 	size: d.gs(function () { return this.__setData__.length; }),
 	values: d(function () { return new Iterator(this); }),
 	'@@iterator': d(getValues),
+	'@@toStringTag': d('c', 'Set'),
 	toString: d(function () { return '[object Set]'; })
 }));
