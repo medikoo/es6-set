@@ -10,11 +10,11 @@ var callable    = require('es5-ext/object/valid-callable')
 
   , isArray = Array.isArray
   , call = Function.prototype.call, defineProperty = Object.defineProperty
-  , Set, getValues;
+  , SetPoly, getValues;
 
-module.exports = Set = function (/*iterable, comparator*/) {
+module.exports = SetPoly = function (/*iterable, comparator*/) {
 	var iterable = arguments[0], comparator = arguments[1];
-	if (!(this instanceof Set)) return new Set(iterable, comparator);
+	if (!(this instanceof SetPoly)) return new SetPoly(iterable, comparator);
 	if (this.__setData__ !== undefined) {
 		throw new TypeError(this + " cannot be reinitialized");
 	}
@@ -29,7 +29,7 @@ module.exports = Set = function (/*iterable, comparator*/) {
 	forOf(iterable, function (value) { this.add(value); }, this);
 };
 
-ee(Object.defineProperties(Set.prototype, {
+ee(Object.defineProperties(SetPoly.prototype, {
 	add: d(function (value) {
 		if (this.has(value)) return this;
 		this.emit('_add', this.__setData__.push(value) - 1);
