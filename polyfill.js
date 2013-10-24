@@ -1,12 +1,14 @@
 'use strict';
 
-var callable    = require('es5-ext/object/valid-callable')
-  , d           = require('d/d')
-  , ee          = require('event-emitter/lib/core')
-  , getIterator = require('es6-iterator/get')
-  , forOf       = require('es6-iterator/for-of')
-  , getSetData  = require('./_get-set-data')
-  , Iterator    = require('./_iterator')
+var setPrototypeOf = require('es5-ext/object/set-prototype-of')
+  , callable       = require('es5-ext/object/valid-callable')
+  , d              = require('d/d')
+  , ee             = require('event-emitter/lib/core')
+  , getIterator    = require('es6-iterator/get')
+  , forOf          = require('es6-iterator/for-of')
+  , getSetData     = require('./_get-set-data')
+  , Iterator       = require('./_iterator')
+  , isNative       = require('./is-native-implemented')
 
   , isArray = Array.isArray
   , call = Function.prototype.call, defineProperty = Object.defineProperty
@@ -28,6 +30,13 @@ module.exports = SetPoly = function (/*iterable, comparator*/) {
 	if (!iterable) return;
 	forOf(iterable, function (value) { this.add(value); }, this);
 };
+
+if (isNative) {
+	if (setPrototypeOf) setPrototypeOf(SetPoly, Set);
+	SetPoly.prototype = Object.create(Set.prototype, {
+		constructor: d(SetPoly)
+	});
+}
 
 ee(Object.defineProperties(SetPoly.prototype, {
 	add: d(function (value) {
