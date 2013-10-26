@@ -44,7 +44,7 @@ if (isNative) {
 ee(Object.defineProperties(SetPoly.prototype, {
 	add: d(function (value) {
 		if (this.has(value)) return this;
-		this.emit('_add', this.__setData__.push(value) - 1);
+		this.emit('_add', this.__setData__.push(value) - 1, value);
 		return this;
 	}),
 	clear: d(function () {
@@ -55,7 +55,7 @@ ee(Object.defineProperties(SetPoly.prototype, {
 		var index = this.__setData__.eIndexOf(value);
 		if (index === -1) return false;
 		this.__setData__.splice(index, 1);
-		this.emit('_delete', index);
+		this.emit('_delete', index, value);
 		return true;
 	}),
 	entries: d(function () { return new Iterator(this, 'key+value'); }),
