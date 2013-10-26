@@ -51,6 +51,7 @@ PrimitiveSet.prototype = Object.create(Set.prototype, {
 		return this;
 	}),
 	clear: d(function () {
+		if (!this.__size__) return;
 		clear(this.__setData__);
 		this.__size__ = 0;
 		this.emit('_clear');

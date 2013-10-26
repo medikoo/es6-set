@@ -48,6 +48,7 @@ ee(Object.defineProperties(SetPoly.prototype, {
 		return this;
 	}),
 	clear: d(function () {
+		if (!this.__setData__.length) return;
 		this.__setData__.clear();
 		this.emit('_clear');
 	}),
