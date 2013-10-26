@@ -28,7 +28,10 @@ module.exports = SetPoly = function (/*iterable, comparator*/) {
 	}
 	defineProperty(this, '__setData__', d('', getSetData(comparator)));
 	if (!iterable) return;
-	forOf(iterable, function (value) { this.add(value); }, this);
+	forOf(iterable, function (value) {
+		if (this.eIndexOf(value) !== -1) return;
+		this.push(value);
+	}, this.__setData__);
 };
 
 if (isNative) {

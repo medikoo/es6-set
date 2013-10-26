@@ -26,7 +26,13 @@ module.exports = PrimitiveSet = function (/*iterable*/) {
 		__size__: d('w', 0)
 	});
 	if (!iterable) return;
-	forOf(iterable, function (value) { this.add(value); }, this);
+	forOf(iterable, function (value) {
+		var key = this._serialize(value);
+		if (key == null) throw new TypeError(value + " cannot be serialized");
+		if (hasOwnProperty.call(this.__setData__, key)) return;
+		this.__setData__[key] = value;
+		++this.__size__;
+	}, this);
 };
 
 PrimitiveSet.prototype = Object.create(Set.prototype, {
