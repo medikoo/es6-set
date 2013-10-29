@@ -35,7 +35,7 @@ module.exports = PrimitiveSet = function (/*iterable*/) {
 	}, this);
 };
 
-PrimitiveSet.prototype = Object.create(Set.prototype, {
+PrimitiveSet.prototype = create(Set.prototype, {
 	constructor: d(PrimitiveSet),
 	_serialize: d(function (value) {
 		if (value && (typeof value.toString !== 'function')) return null;
