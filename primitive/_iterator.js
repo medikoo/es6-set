@@ -9,6 +9,7 @@ var clear          = require('es5-ext/array/#/clear')
   , Iterator       = require('es6-iterator')
 
   , defineProperties = Object.defineProperties, keys = Object.keys
+  , unBind = Iterator.prototype._unBind
   , PrimitiveSetIterator;
 
 PrimitiveSetIterator = module.exports = function (set, kind) {
@@ -21,7 +22,7 @@ PrimitiveSetIterator = module.exports = function (set, kind) {
 	else kind = 'value';
 	defineProperties(this, {
 		__kind__: d('', kind),
-		__data__: d('', set.__setData__)
+		__data__: d('w', set.__setData__)
 	});
 };
 if (setPrototypeOf) setPrototypeOf(PrimitiveSetIterator, Iterator);
@@ -31,6 +32,10 @@ PrimitiveSetIterator.prototype = Object.create(Iterator.prototype, assign({
 	_resolve: d(function (i) {
 		var value = this.__data__[this.__list__[i]];
 		return (this.__kind__ === 'value') ? value : [value, value];
+	}),
+	_unBind: d(function () {
+		this.__data__ = null;
+		unBind.call(this);
 	}),
 	toString: d(function () { return '[object Set Iterator]'; })
 }, autoBind({
