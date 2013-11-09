@@ -1,8 +1,9 @@
 'use strict';
 
-var contains = require('es5-ext/string/#/contains')
-  , d        = require('d/d')
-  , Iterator = require('es6-iterator')
+var setPrototypeOf = require('es5-ext/object/set-prototype-of')
+  , contains       = require('es5-ext/string/#/contains')
+  , d              = require('d/d')
+  , Iterator       = require('es6-iterator')
 
   , defineProperty = Object.defineProperty
   , SetIterator;
@@ -15,6 +16,7 @@ SetIterator = module.exports = function (set, kind) {
 	else kind = 'value';
 	defineProperty(this, '__kind__', d('', kind));
 };
+if (setPrototypeOf) setPrototypeOf(SetIterator, Iterator);
 
 SetIterator.prototype = Object.create(Iterator.prototype, {
 	constructor: d(SetIterator),
