@@ -1,11 +1,12 @@
 'use strict';
 
-var clear    = require('es5-ext/array/#/clear')
-  , assign   = require('es5-ext/object/assign')
-  , contains = require('es5-ext/string/#/contains')
-  , d        = require('d/d')
-  , autoBind = require('d/auto-bind')
-  , Iterator = require('es6-iterator')
+var clear          = require('es5-ext/array/#/clear')
+  , assign         = require('es5-ext/object/assign')
+  , setPrototypeOf = require('es5-ext/object/set-prototype-of')
+  , contains       = require('es5-ext/string/#/contains')
+  , d              = require('d/d')
+  , autoBind       = require('d/auto-bind')
+  , Iterator       = require('es6-iterator')
 
   , defineProperties = Object.defineProperties, keys = Object.keys
   , PrimitiveSetIterator;
@@ -23,6 +24,7 @@ PrimitiveSetIterator = module.exports = function (set, kind) {
 		__data__: d('', set.__setData__)
 	});
 };
+if (setPrototypeOf) setPrototypeOf(PrimitiveSetIterator, Iterator);
 
 PrimitiveSetIterator.prototype = Object.create(Iterator.prototype, assign({
 	constructor: d(PrimitiveSetIterator),
