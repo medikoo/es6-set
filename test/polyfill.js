@@ -1,8 +1,7 @@
 'use strict';
 
-var aFrom       = require('es5-ext/array/from')
-  , getIterator = require('es6-iterator/get')
-  , toArray     = require('es6-iterator/to-array');
+var aFrom   = require('es5-ext/array/from')
+  , toArray = require('es6-iterator/to-array');
 
 module.exports = function (T, a) {
 	var arr = ['raz', 'dwa', 'trzy'], set = new T(arr), x = {}, y = {}, i = 0;
@@ -36,10 +35,10 @@ module.exports = function (T, a) {
 		['cztery', 'cztery']], "Entries");
 	a.deep(toArray(set.keys()), ['dwa', 'trzy', x, 'cztery'], "Keys");
 	a.deep(toArray(set.values()), ['dwa', 'trzy', x, 'cztery'], "Values");
-	a.deep(toArray(getIterator(set)), ['dwa', 'trzy', x, 'cztery'], "Iterator");
+	a.deep(toArray(set), ['dwa', 'trzy', x, 'cztery'], "Iterator");
 
 	set.clear();
 	a(set.size, 0, "Clear: size");
 	a(set.has('trzy'), false, "Clear: has");
-	a.deep(toArray(set.values()), [], "Clear: Values");
+	a.deep(toArray(set), [], "Clear: Values");
 };
