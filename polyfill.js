@@ -4,13 +4,12 @@ var setPrototypeOf = require('es5-ext/object/set-prototype-of')
   , callable       = require('es5-ext/object/valid-callable')
   , d              = require('d/d')
   , ee             = require('event-emitter/lib/core')
-  , getIterator    = require('es6-iterator/get')
+  , iterator       = require('es6-iterator/valid-iterable')
   , forOf          = require('es6-iterator/for-of')
   , getSetData     = require('./_get-set-data')
   , Iterator       = require('./_iterator')
   , isNative       = require('./is-native-implemented')
 
-  , isArray = Array.isArray
   , call = Function.prototype.call, defineProperty = Object.defineProperty
   , SetPoly, getValues;
 
@@ -20,9 +19,7 @@ module.exports = SetPoly = function (/*iterable, comparator*/) {
 	if (this.__setData__ !== undefined) {
 		throw new TypeError(this + " cannot be reinitialized");
 	}
-	if (iterable != null) {
-		if (!isArray(iterable)) iterable = getIterator(iterable);
-	}
+	if (iterable != null) iterator(iterable);
 	if (comparator != null) {
 		if (comparator !== 'is') throw new RangeError("Unknown comparator");
 	}
