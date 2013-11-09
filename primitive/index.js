@@ -1,11 +1,12 @@
 'use strict';
 
-var clear       = require('es5-ext/object/clear')
-  , d           = require('d/d')
-  , getIterator = require('es6-iterator/get')
-  , forOf       = require('es6-iterator/for-of')
-  , Set         = require('../polyfill')
-  , Iterator    = require('./_iterator')
+var clear          = require('es5-ext/object/clear')
+  , setPrototypeOf = require('es5-ext/object/set-prototype-of')
+  , d              = require('d/d')
+  , getIterator    = require('es6-iterator/get')
+  , forOf          = require('es6-iterator/for-of')
+  , Set            = require('../polyfill')
+  , Iterator       = require('./_iterator')
 
   , isArray = Array.isArray, create = Object.create
   , defineProperties = Object.defineProperties
@@ -34,6 +35,7 @@ module.exports = PrimitiveSet = function (/*iterable*/) {
 		++this.__size__;
 	}, this);
 };
+if (setPrototypeOf) setPrototypeOf(PrimitiveSet, Set);
 
 PrimitiveSet.prototype = create(Set.prototype, {
 	constructor: d(PrimitiveSet),
