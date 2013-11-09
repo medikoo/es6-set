@@ -65,12 +65,16 @@ PrimitiveSet.prototype = create(Set.prototype, {
 		return true;
 	}),
 	entries: d(function () { return new Iterator(this, 'key+value'); }),
+	get: d(function (key) {
+		key = this._serialize(key);
+		if (key == null) return;
+		return this.__setData__[key];
+	}),
 	has: d(function (value) {
 		var key = this._serialize(value);
 		if (key == null) return false;
 		return hasOwnProperty.call(this.__setData__, key);
 	}),
 	size: d.gs(function () { return this.__size__; }),
-	get: d(function (key) { return this.__setData__[key]; }),
 	values: d(function () { return new Iterator(this); })
 });
