@@ -3,13 +3,12 @@
 var clear          = require('es5-ext/object/clear')
   , setPrototypeOf = require('es5-ext/object/set-prototype-of')
   , d              = require('d/d')
-  , getIterator    = require('es6-iterator/get')
+  , iterator       = require('es6-iterator/valid-iterable')
   , forOf          = require('es6-iterator/for-of')
   , Set            = require('../polyfill')
   , Iterator       = require('./_iterator')
 
-  , isArray = Array.isArray, create = Object.create
-  , defineProperties = Object.defineProperties
+  , create = Object.create, defineProperties = Object.defineProperties
   , hasOwnProperty = Object.prototype.hasOwnProperty
   , PrimitiveSet;
 
@@ -19,9 +18,7 @@ module.exports = PrimitiveSet = function (/*iterable*/) {
 	if (this.__setData__ !== undefined) {
 		throw new TypeError(this + " cannot be reinitialized");
 	}
-	if (iterable != null) {
-		if (!isArray(iterable)) iterable = getIterator(iterable);
-	}
+	if (iterable != null) iterator(iterable);
 	defineProperties(this, {
 		__setData__: d('', create(null)),
 		__size__: d('w', 0)
