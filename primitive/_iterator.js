@@ -17,9 +17,7 @@ PrimitiveSetIterator = module.exports = function (set, kind) {
 		return new PrimitiveSetIterator(set, kind);
 	}
 	Iterator.call(this, keys(set.__setData__), set);
-	if (!kind) kind = 'value';
-	else if (contains.call(kind, 'key+value')) kind = 'key+value';
-	else kind = 'value';
+	kind = (!kind || !contains.call(kind, 'key+value')) ? 'value' : 'key+value';
 	defineProperties(this, {
 		__kind__: d('', kind),
 		__data__: d('w', set.__setData__)
