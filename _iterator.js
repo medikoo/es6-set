@@ -24,5 +24,6 @@ SetIterator.prototype = Object.create(Iterator.prototype, {
 		if (this.__kind__ === 'value') return this.__list__[i];
 		return [this.__list__[i], this.__list__[i]];
 	}),
+	'@@toStringTag': d('c', 'Set Iterator'),
 	toString: d(function () { return '[object Set Iterator]'; })
 });

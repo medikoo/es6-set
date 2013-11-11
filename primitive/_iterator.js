@@ -35,6 +35,7 @@ PrimitiveSetIterator.prototype = Object.create(Iterator.prototype, assign({
 		this.__data__ = null;
 		unBind.call(this);
 	}),
+	'@@toStringTag': d('c', 'Set Iterator'),
 	toString: d(function () { return '[object Set Iterator]'; })
 }, autoBind({
 	_onAdd: d(function (key) { this.__list__.push(key); }),
