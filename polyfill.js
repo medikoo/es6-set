@@ -58,13 +58,14 @@ ee(Object.defineProperties(SetPoly.prototype, {
 	}),
 	entries: d(function () { return new Iterator(this, 'key+value'); }),
 	forEach: d(function (cb/*, thisArg*/) {
-		var thisArg = arguments[1], iterator, result;
+		var thisArg = arguments[1], iterator, result, value;
 		callable(cb);
 		iterator = this.values();
-		result = iterator.next();
-		while (!result.done) {
-			call.call(cb, thisArg, result.value, result.value, this);
-			result = iterator.next();
+		result = iterator._next();
+		while (result !== undefined) {
+			value = iterator._resolve(result);
+			call.call(cb, thisArg, value, value, this);
+			result = iterator._next();
 		}
 	}),
 	has: d(function (value) {
