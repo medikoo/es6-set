@@ -4,6 +4,7 @@ var setPrototypeOf = require('es5-ext/object/set-prototype-of')
   , callable       = require('es5-ext/object/valid-callable')
   , d              = require('d/d')
   , ee             = require('event-emitter/lib/core')
+  , Symbol         = require('es6-symbol')
   , iterator       = require('es6-iterator/valid-iterable')
   , forOf          = require('es6-iterator/for-of')
   , getSetData     = require('./_get-set-data')
@@ -74,7 +75,7 @@ ee(Object.defineProperties(SetPoly.prototype, {
 	keys: d(getValues = function () { return this.values(); }),
 	size: d.gs(function () { return this.__setData__.length; }),
 	values: d(function () { return new Iterator(this); }),
-	'@@iterator': d(getValues),
-	'@@toStringTag': d('c', 'Set'),
 	toString: d(function () { return '[object Set]'; })
 }));
+defineProperty(SetPoly.prototype, Symbol.iterator, d(getValues));
+defineProperty(SetPoly.prototype, Symbol.toStringTag, d('c', 'Set'));

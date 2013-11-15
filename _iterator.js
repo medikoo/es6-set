@@ -1,9 +1,10 @@
 'use strict';
 
-var setPrototypeOf = require('es5-ext/object/set-prototype-of')
-  , contains       = require('es5-ext/string/#/contains')
-  , d              = require('d/d')
-  , Iterator       = require('es6-iterator')
+var setPrototypeOf    = require('es5-ext/object/set-prototype-of')
+  , contains          = require('es5-ext/string/#/contains')
+  , d                 = require('d/d')
+  , Iterator          = require('es6-iterator')
+  , toStringTagSymbol = require('es6-symbol').toStringTag
 
   , defineProperty = Object.defineProperty
   , SetIterator;
@@ -24,6 +25,7 @@ SetIterator.prototype = Object.create(Iterator.prototype, {
 		if (this.__kind__ === 'value') return this.__list__[i];
 		return [this.__list__[i], this.__list__[i]];
 	}),
-	'@@toStringTag': d('c', 'Set Iterator'),
 	toString: d(function () { return '[object Set Iterator]'; })
 });
+defineProperty(SetIterator.prototype, toStringTagSymbol,
+	d('c', 'Set Iterator'));

@@ -1,12 +1,13 @@
 'use strict';
 
-var clear          = require('es5-ext/array/#/clear')
-  , assign         = require('es5-ext/object/assign')
-  , setPrototypeOf = require('es5-ext/object/set-prototype-of')
-  , contains       = require('es5-ext/string/#/contains')
-  , d              = require('d/d')
-  , autoBind       = require('d/auto-bind')
-  , Iterator       = require('es6-iterator')
+var clear             = require('es5-ext/array/#/clear')
+  , assign            = require('es5-ext/object/assign')
+  , setPrototypeOf    = require('es5-ext/object/set-prototype-of')
+  , contains          = require('es5-ext/string/#/contains')
+  , d                 = require('d/d')
+  , autoBind          = require('d/auto-bind')
+  , Iterator          = require('es6-iterator')
+  , toStringTagSymbol = require('es6-symbol').toStringTag
 
   , defineProperties = Object.defineProperties, keys = Object.keys
   , unBind = Iterator.prototype._unBind
@@ -35,7 +36,6 @@ PrimitiveSetIterator.prototype = Object.create(Iterator.prototype, assign({
 		this.__data__ = null;
 		unBind.call(this);
 	}),
-	'@@toStringTag': d('c', 'Set Iterator'),
 	toString: d(function () { return '[object Set Iterator]'; })
 }, autoBind({
 	_onAdd: d(function (key) { this.__list__.push(key); }),
@@ -49,3 +49,5 @@ PrimitiveSetIterator.prototype = Object.create(Iterator.prototype, assign({
 		this.__nextIndex__ = 0;
 	})
 })));
+Object.defineProperty(PrimitiveSetIterator.prototype, toStringTagSymbol,
+	d('c', 'Set Iterator'));

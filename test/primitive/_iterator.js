@@ -1,7 +1,8 @@
 'use strict';
 
-var Set     = require('../../primitive')
-  , toArray = require('es6-iterator/to-array')
+var Set            = require('../../primitive')
+  , toArray        = require('es6-iterator/to-array')
+  , iteratorSymbol = require('es6-symbol').iterator
 
   , compare, map;
 
@@ -24,7 +25,7 @@ module.exports = function (T) {
 			  , set = new Set(arr), result = [];
 
 			it = new T(set);
-			a(it['@@iterator'](), it, "@@iterator");
+			a(it[iteratorSymbol](), it, "@@iterator");
 			y = it.next();
 			result.push(y);
 			z = it.next();
