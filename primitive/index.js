@@ -23,7 +23,7 @@ module.exports = PrimitiveSet = function (/*iterable, serialize*/) {
 		throw new TypeError(this + " cannot be reinitialized");
 	}
 	if (iterable != null) iterator(iterable);
-	if (serialize != null) {
+	if (serialize !== undefined) {
 		callable(serialize);
 		defineProperty(this, '_serialize', d('', serialize));
 	}
