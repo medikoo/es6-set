@@ -1,6 +1,7 @@
 'use strict';
 
-var clear          = require('es5-ext/object/clear')
+var callable       = require('es5-ext/object/valid-callable')
+  , clear          = require('es5-ext/object/clear')
   , setPrototypeOf = require('es5-ext/object/set-prototype-of')
   , d              = require('d/d')
   , iterator       = require('es6-iterator/valid-iterable')
@@ -9,16 +10,23 @@ var clear          = require('es5-ext/object/clear')
   , Iterator       = require('./_iterator')
 
   , create = Object.create, defineProperties = Object.defineProperties
+  , defineProperty = Object.defineProperty
   , hasOwnProperty = Object.prototype.hasOwnProperty
   , PrimitiveSet;
 
-module.exports = PrimitiveSet = function (/*iterable*/) {
-	var iterable = arguments[0];
-	if (!(this instanceof PrimitiveSet)) return new PrimitiveSet(iterable);
+module.exports = PrimitiveSet = function (/*iterable, serialize*/) {
+	var iterable = arguments[0], serialize = arguments[1];
+	if (!(this instanceof PrimitiveSet)) {
+		return new PrimitiveSet(iterable, serialize);
+	}
 	if (this.__setData__ !== undefined) {
 		throw new TypeError(this + " cannot be reinitialized");
 	}
 	if (iterable != null) iterator(iterable);
+	if (serialize != null) {
+		callable(serialize);
+		defineProperty(this, '_serialize', d('', serialize));
+	}
 	defineProperties(this, {
 		__setData__: d('', create(null)),
 		__size__: d('w', 0)
