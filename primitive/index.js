@@ -28,7 +28,7 @@ module.exports = PrimitiveSet = function (/*iterable, serialize*/) {
 		defineProperty(this, '_serialize', d('', serialize));
 	}
 	defineProperties(this, {
-		__setData__: d('', create(null)),
+		__setData__: d('c', create(null)),
 		__size__: d('w', 0)
 	});
 	if (!iterable) return;
