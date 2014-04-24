@@ -2,7 +2,7 @@
 
 var setPrototypeOf    = require('es5-ext/object/set-prototype-of')
   , contains          = require('es5-ext/string/#/contains')
-  , d                 = require('d/d')
+  , d                 = require('d')
   , Iterator          = require('es6-iterator')
   , toStringTagSymbol = require('es6-symbol').toStringTag
 

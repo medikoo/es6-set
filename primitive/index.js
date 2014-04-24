@@ -3,7 +3,7 @@
 var callable       = require('es5-ext/object/valid-callable')
   , clear          = require('es5-ext/object/clear')
   , setPrototypeOf = require('es5-ext/object/set-prototype-of')
-  , d              = require('d/d')
+  , d              = require('d')
   , iterator       = require('es6-iterator/valid-iterable')
   , forOf          = require('es6-iterator/for-of')
   , Set            = require('../polyfill')
