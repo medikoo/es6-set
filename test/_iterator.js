@@ -1,7 +1,7 @@
 'use strict';
 
 var Set     = require('../polyfill')
-  , toArray = require('es6-iterator/to-array');
+  , toArray = require('es5-ext/array/to-array');
 
 module.exports = function (T, a) {
 	var set = new Set(['raz', 'dwa']);
