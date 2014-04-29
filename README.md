@@ -21,6 +21,12 @@ If you strictly want to use polyfill even if native `Set` exists, do:
 var Set = require('es6-set/polyfill');
 ```
 
+### Installation
+
+	$ npm install es6-set
+	
+To port it to Browser or any other (non CJS) environment, use your favorite CJS bundler. No favorite yet? Try: [Browserify](http://browserify.org/), [Webmake](https://github.com/medikoo/modules-webmake) or [Webpack](http://webpack.github.io/)
+
 #### API
 
 Best is to refer to [specification](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-set-objects). Still if you want quick look, follow examples:
@@ -44,7 +50,6 @@ set.forEach(function (value) {
  // 'raz', {}, 'foo' iterated
 });
 
-
 // FF nightly only:
 for (value of set) {
  // 'raz', {}, 'foo' iterated
@@ -60,17 +65,6 @@ iterator.next(); // { done: true, value: undefined }
 set.clear(); // undefined
 set.size; // 0
 ```
-
-### Installation
-#### NPM
-
-In your project path:
-
-	$ npm install es6-set
-
-##### Browser
-
-You can easily bundle _es6-set_ for browser with [modules-webmake](https://github.com/medikoo/modules-webmake)
 
 ## Tests [![Build Status](https://travis-ci.org/medikoo/es6-set.png)](https://travis-ci.org/medikoo/es6-set)
 
