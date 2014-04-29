@@ -1,6 +1,6 @@
 'use strict';
 
-var Set     = require('../polyfill')
+var Set     = require('../../polyfill')
   , toArray = require('es5-ext/array/to-array');
 
 module.exports = function (T, a) {

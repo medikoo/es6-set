@@ -7,7 +7,7 @@ var callable       = require('es5-ext/object/valid-callable')
   , iterator       = require('es6-iterator/valid-iterable')
   , forOf          = require('es6-iterator/for-of')
   , Set            = require('../polyfill')
-  , Iterator       = require('./_iterator')
+  , Iterator       = require('../lib/primitive-iterator')
 
   , create = Object.create, defineProperties = Object.defineProperties
   , defineProperty = Object.defineProperty
