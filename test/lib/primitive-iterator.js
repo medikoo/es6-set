@@ -38,7 +38,7 @@ module.exports = function (T) {
 			a.deep(y = it.next(), { done: true, value: undefined }, "End");
 			a.not(y, it.next(), "Recreate result on dead");
 		},
-		"Emited": function (a) {
+		Emited: function (a) {
 			var arr = ['raz', 'dwa', 'trzy', 'cztery', 'pięć'], it
 			  , set = new Set(arr), result = [];
 
@@ -100,7 +100,7 @@ module.exports = function (T) {
 			a.deep(result.sort(compare), map(arr));
 			a.deep(it.next(), { done: true, value: undefined }, "End");
 		},
-		"Kinds": function (a) {
+		Kinds: function (a) {
 			var set = new Set(['raz', 'dwa']);
 
 			a.deep(toArray(new T(set)).sort(), ['raz', 'dwa'].sort(), "Default");
