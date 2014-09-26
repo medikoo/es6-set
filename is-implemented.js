@@ -16,7 +16,7 @@ module.exports = function () {
 
 	iterator = set.values();
 	result = iterator.next();
-	if (result.done !== true) return false;
+	if (result.done !== false) return false;
 	if (result.value !== 'raz') return false;
 	return true;
 };
