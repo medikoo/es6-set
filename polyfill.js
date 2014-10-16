@@ -12,22 +12,23 @@ var clear          = require('es5-ext/array/#/clear')
   , Iterator       = require('./lib/iterator')
   , isNative       = require('./is-native-implemented')
 
-  , call = Function.prototype.call, defineProperty = Object.defineProperty
+  , call = Function.prototype.call
+  , defineProperty = Object.defineProperty, getPrototypeOf = Object.getPrototypeOf
   , SetPoly, getValues;
 
 module.exports = SetPoly = function (/*iterable*/) {
-	var iterable = arguments[0];
-	if (!(this instanceof SetPoly)) return new SetPoly(iterable);
-	if (this.__setData__ !== undefined) {
-		throw new TypeError(this + " cannot be reinitialized");
-	}
+	var iterable = arguments[0], self;
+	if (!(this instanceof SetPoly)) throw new TypeError('Constructor requires \'new\'');
+	if (isNative && setPrototypeOf) self = setPrototypeOf(new Set(), getPrototypeOf(this));
+	else self = this;
 	if (iterable != null) iterator(iterable);
-	defineProperty(this, '__setData__', d('c', []));
+	defineProperty(self, '__setData__', d('c', []));
 	if (!iterable) return;
 	forOf(iterable, function (value) {
 		if (eIndexOf.call(this, value) !== -1) return;
 		this.push(value);
-	}, this.__setData__);
+	}, self.__setData__);
+	return self;
 };
 
 if (isNative) {

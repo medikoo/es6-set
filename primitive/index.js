@@ -8,37 +8,36 @@ var callable       = require('es5-ext/object/valid-callable')
   , forOf          = require('es6-iterator/for-of')
   , Set            = require('../polyfill')
   , Iterator       = require('../lib/primitive-iterator')
+  , isNative       = require('../is-native-implemented')
 
   , create = Object.create, defineProperties = Object.defineProperties
-  , defineProperty = Object.defineProperty
+  , defineProperty = Object.defineProperty, getPrototypeOf = Object.getPrototypeOf
   , hasOwnProperty = Object.prototype.hasOwnProperty
   , PrimitiveSet;
 
 module.exports = PrimitiveSet = function (/*iterable, serialize*/) {
-	var iterable = arguments[0], serialize = arguments[1];
-	if (!(this instanceof PrimitiveSet)) {
-		return new PrimitiveSet(iterable, serialize);
-	}
-	if (this.__setData__ !== undefined) {
-		throw new TypeError(this + " cannot be reinitialized");
-	}
+	var iterable = arguments[0], serialize = arguments[1], self;
+	if (!(this instanceof PrimitiveSet)) throw new TypeError('Constructor requires \'new\'');
+	if (isNative && setPrototypeOf) self = setPrototypeOf(new Set(), getPrototypeOf(this));
+	else self = this;
 	if (iterable != null) iterator(iterable);
 	if (serialize !== undefined) {
 		callable(serialize);
-		defineProperty(this, '_serialize', d('', serialize));
+		defineProperty(self, '_serialize', d('', serialize));
 	}
-	defineProperties(this, {
+	defineProperties(self, {
 		__setData__: d('c', create(null)),
 		__size__: d('w', 0)
 	});
 	if (!iterable) return;
 	forOf(iterable, function (value) {
-		var key = this._serialize(value);
+		var key = self._serialize(value);
 		if (key == null) throw new TypeError(value + " cannot be serialized");
-		if (hasOwnProperty.call(this.__setData__, key)) return;
-		this.__setData__[key] = value;
-		++this.__size__;
-	}, this);
+		if (hasOwnProperty.call(self.__setData__, key)) return;
+		self.__setData__[key] = value;
+		++self.__size__;
+	});
+	return self;
 };
 if (setPrototypeOf) setPrototypeOf(PrimitiveSet, Set);
 
