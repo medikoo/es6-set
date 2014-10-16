@@ -33,9 +33,7 @@ module.exports = SetPoly = function (/*iterable*/) {
 
 if (isNative) {
 	if (setPrototypeOf) setPrototypeOf(SetPoly, Set);
-	SetPoly.prototype = Object.create(Set.prototype, {
-		constructor: d(SetPoly)
-	});
+	SetPoly.prototype = Object.create(Set.prototype, { constructor: d(SetPoly) });
 }
 
 ee(Object.defineProperties(SetPoly.prototype, {
