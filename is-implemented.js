@@ -24,9 +24,6 @@ module.exports = function () {
 	if (result.done !== false) return false;
 	if (result.value !== 'raz') return false;
 
-	// Non new call
-	try { set = Set([1, 2, 3]); } catch (e) { return false; } //jslint: ignore
-
 	if (!set) return false;
 	if (set.size !== 3) return false;
 
