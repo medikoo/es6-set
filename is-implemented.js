@@ -1,11 +1,7 @@
 'use strict';
 
-var d = require('d')
-
-  , create = Object.create, setPrototypeOf = Object.setPrototypeOf;
-
 module.exports = function () {
-	var set, iterator, result, SubSet;
+	var set, iterator, result;
 	if (typeof Set !== 'function') return false;
 	if (String(Set.prototype) !== '[object Set]') return false;
 	set = new Set(['raz', 'dwa', 'trzy']);
@@ -27,15 +23,5 @@ module.exports = function () {
 	if (!set) return false;
 	if (set.size !== 3) return false;
 
-	// Extendable
-	if (setPrototypeOf) {
-		SubSet = function () { Set.apply(this, arguments); };
-		setPrototypeOf(SubSet, Set);
-		SubSet.prototype = create(Set.prototype, { constructor: d(SubSet) });
-		try { set = new SubSet([1, 2, 3]); } catch (e) { return false; }
-		try {
-			if (set.size !== 3) return false;
-		} catch (e) { return false; }
-	}
 	return true;
 };
