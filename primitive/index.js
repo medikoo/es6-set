@@ -29,7 +29,7 @@ module.exports = PrimitiveSet = function (/*iterable, serialize*/) {
 		__setData__: d('c', create(null)),
 		__size__: d('w', 0)
 	});
-	if (!iterable) return;
+	if (!iterable) return self;
 	forOf(iterable, function (value) {
 		var key = self._serialize(value);
 		if (key == null) throw new TypeError(value + " cannot be serialized");

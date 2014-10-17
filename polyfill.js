@@ -23,7 +23,7 @@ module.exports = SetPoly = function (/*iterable*/) {
 	else self = this;
 	if (iterable != null) iterator(iterable);
 	defineProperty(self, '__setData__', d('c', []));
-	if (!iterable) return;
+	if (!iterable) return self;
 	forOf(iterable, function (value) {
 		if (eIndexOf.call(this, value) !== -1) return;
 		this.push(value);

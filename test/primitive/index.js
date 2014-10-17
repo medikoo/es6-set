@@ -41,4 +41,10 @@ module.exports = function (T, a) {
 	a(set.size, 0, "Clear: size");
 	a(set.has('trzy'), false, "Clear: has");
 	a.deep(toArray(set.values()), [], "Clear: Values");
+
+	a.h1("Empty initialization");
+	set = new T();
+	set.add('foo');
+	a(set.size, 1);
+	a(set.has('foo'), true);
 };
