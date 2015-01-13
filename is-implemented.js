@@ -20,8 +20,5 @@ module.exports = function () {
 	if (result.done !== false) return false;
 	if (result.value !== 'raz') return false;
 
-	if (!set) return false;
-	if (set.size !== 3) return false;
-
 	return true;
 };
