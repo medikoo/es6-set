@@ -1,3 +1,9 @@
+v0.1.2  --  2015.10.02
+* Improve native Set detection
+* Fix spelling of LICENSE
+* Set.prototype.filter extension
+* Update dependencies
+
 v0.1.1  --  2014.10.07
 * Fix isImplemented so it validates native Set properly
 * Add getFirst and getLast extensions
