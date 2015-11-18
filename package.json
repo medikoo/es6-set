@@ -1,6 +1,6 @@
 {
   "name": "es6-set",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "ECMAScript6 Set polyfill",
   "author": "Mariusz Nowak <medyk@medikoo.com> (http://www.medikoo.com/)",
   "keywords": [
@@ -23,7 +23,7 @@
     "event-emitter": "~0.3.4"
   },
   "devDependencies": {
-    "tad": "~0.2.3",
+    "tad": "~0.2.4",
     "xlint": "~0.2.2",
     "xlint-jslint-medikoo": "~0.1.4"
   },
