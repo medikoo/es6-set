@@ -16,7 +16,7 @@ var clear          = require('es5-ext/array/#/clear')
   , defineProperty = Object.defineProperty, getPrototypeOf = Object.getPrototypeOf
   , SetPoly, getValues;
 
-module.exports = SetPoly = function (/*iterable*/) {
+module.exports = SetPoly = function Set(/*iterable*/) {
 	var iterable = arguments[0], self;
 	if (!(this instanceof SetPoly)) throw new TypeError('Constructor requires \'new\'');
 	if (isNative && setPrototypeOf) self = setPrototypeOf(new Set(), getPrototypeOf(this));
