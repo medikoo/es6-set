@@ -62,7 +62,7 @@ PrimitiveSet.prototype = create(Set.prototype, {
 		this.__size__ = 0;
 		this.emit('_clear');
 	}),
-	"delete": d(function (value) {
+	'delete': d(function (value) {
 		var key = this._serialize(value);
 		if (key == null) return false;
 		if (!hasOwnProperty.call(this.__setData__, key)) return false;
