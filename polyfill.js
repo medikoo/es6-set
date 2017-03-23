@@ -49,7 +49,7 @@ ee(Object.defineProperties(SetPoly.prototype, {
 		clear.call(this.__setData__);
 		this.emit('_clear');
 	}),
-	delete: d(function (value) {
+	"delete": d(function (value) {
 		var index = eIndexOf.call(this.__setData__, value);
 		if (index === -1) return false;
 		this.__setData__.splice(index, 1);
