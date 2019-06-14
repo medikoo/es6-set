@@ -81,7 +81,7 @@ To report a security vulnerability, please use the [Tidelift security contact](h
 
 <div align="center">
 	<b>
-		<a href="https://tidelift.com/subscription/pkg/npm-d?utm_source=npm-d&utm_medium=referral&utm_campaign=readme">Get professional support for d with a Tidelift subscription</a>
+		<a href="https://tidelift.com/subscription/pkg/npm-es6-set?utm_source=npm-es6-set&utm_medium=referral&utm_campaign=readme">Get professional support for d with a Tidelift subscription</a>
 	</b>
 	<br>
 	<sub>
