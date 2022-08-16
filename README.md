@@ -1,3 +1,7 @@
+[![Build status][build-image]][build-url]
+[![Tests coverage][cov-image]][cov-url]
+[![npm version][npm-image]][npm-url]
+
 # es6-set
 
 ## Set collection as specified in ECMAScript6
@@ -89,3 +93,10 @@ To report a security vulnerability, please use the [Tidelift security contact](h
 		Tidelift helps make open source sustainable for maintainers while giving companies<br>assurances about security, maintenance, and licensing for their dependencies.
 	</sub>
 </div>
+
+[build-image]: https://github.com/medikoo/es6-set/workflows/Integrate/badge.svg
+[build-url]: https://github.com/medikoo/es6-set/actions?query=workflow%3AIntegrate
+[cov-image]: https://img.shields.io/codecov/c/github/medikoo/es6-set.svg
+[cov-url]: https://codecov.io/gh/medikoo/es6-set
+[npm-image]: https://img.shields.io/npm/v/es6-set.svg
+[npm-url]: https://www.npmjs.com/package/es6-set
