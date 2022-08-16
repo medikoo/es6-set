@@ -1,0 +1,5 @@
+/.editorconfig
+/.github
+/CHANGES
+/commitlint.config.js
+/test
