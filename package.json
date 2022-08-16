@@ -67,7 +67,7 @@
 		"lint": "eslint --ignore-path=.gitignore .",
 		"prettier-check": "prettier -c --ignore-path .gitignore \"**/*.{css,html,js,json,md,yaml,yml}\"",
 		"prettify": "prettier --write --ignore-path .gitignore \"**/*.{css,html,js,json,md,yaml,yml}\"",
-		"test": "node ./node_modules/tad/bin/tad"
+		"test": "tad"
 	},
 	"license": "ISC"
 }
