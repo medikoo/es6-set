@@ -74,7 +74,7 @@ set.clear(); // undefined
 set.size; // 0
 ```
 
-## Tests [![Build Status](https://travis-ci.org/medikoo/es6-set.png)](https://travis-ci.org/medikoo/es6-set)
+## Tests
 
     $ npm test
 
