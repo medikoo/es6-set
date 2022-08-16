@@ -11,10 +11,7 @@
 		"list",
 		"hash"
 	],
-	"repository": {
-		"type": "git",
-		"url": "git://github.com/medikoo/es6-set.git"
-	},
+	"repository": "medikoo/es6-set",
 	"dependencies": {
 		"d": "^1.0.1",
 		"es5-ext": "^0.10.50",
