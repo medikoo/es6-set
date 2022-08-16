@@ -2,7 +2,7 @@
 
 var isSet = require("./is-set");
 
-module.exports = function (x) {
-	if (!isSet(x)) throw new TypeError(x + " is not a Set");
-	return x;
+module.exports = function (value) {
+	if (!isSet(value)) throw new TypeError(value + " is not a Set");
+	return value;
 };

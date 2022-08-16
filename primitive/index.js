@@ -1,27 +1,28 @@
 "use strict";
 
-var callable         = require("es5-ext/object/valid-callable")
-  , clear            = require("es5-ext/object/clear")
-  , setPrototypeOf   = require("es5-ext/object/set-prototype-of")
-  , d                = require("d")
-  , iterator         = require("es6-iterator/valid-iterable")
-  , forOf            = require("es6-iterator/for-of")
-  , Set              = require("../polyfill")
-  , Iterator         = require("../lib/primitive-iterator")
-  , isNative         = require("../is-native-implemented")
-  , create           = Object.create
-  , defineProperties = Object.defineProperties
-  , defineProperty   = Object.defineProperty
-  , getPrototypeOf   = Object.getPrototypeOf
-  , hasOwnProperty   = Object.prototype.hasOwnProperty
+var isValue           = require("type/value/is")
+  , callable          = require("es5-ext/object/valid-callable")
+  , clear             = require("es5-ext/object/clear")
+  , setPrototypeOf    = require("es5-ext/object/set-prototype-of")
+  , d                 = require("d")
+  , iterator          = require("es6-iterator/valid-iterable")
+  , forOf             = require("es6-iterator/for-of")
+  , SetPolyfill       = require("../polyfill")
+  , Iterator          = require("../lib/primitive-iterator")
+  , isNative          = require("../is-native-implemented")
+  , create            = Object.create
+  , defineProperties  = Object.defineProperties
+  , defineProperty    = Object.defineProperty
+  , getPrototypeOf    = Object.getPrototypeOf
+  , objHasOwnProperty = Object.prototype.hasOwnProperty
   , PrimitiveSet;
 
-module.exports = PrimitiveSet = function (/*iterable, serialize*/) {
+module.exports = PrimitiveSet = function (/* iterable, serialize*/) {
 	var iterable = arguments[0], serialize = arguments[1], self;
 	if (!(this instanceof PrimitiveSet)) throw new TypeError("Constructor requires 'new'");
-	if (isNative && setPrototypeOf) self = setPrototypeOf(new Set(), getPrototypeOf(this));
+	if (isNative && setPrototypeOf) self = setPrototypeOf(new SetPolyfill(), getPrototypeOf(this));
 	else self = this;
-	if (iterable != null) iterator(iterable);
+	if (isValue(iterable)) iterator(iterable);
 	if (serialize !== undefined) {
 		callable(serialize);
 		defineProperty(self, "_serialize", d("", serialize));
@@ -30,16 +31,16 @@ module.exports = PrimitiveSet = function (/*iterable, serialize*/) {
 	if (!iterable) return self;
 	forOf(iterable, function (value) {
 		var key = self._serialize(value);
-		if (key == null) throw new TypeError(value + " cannot be serialized");
-		if (hasOwnProperty.call(self.__setData__, key)) return;
+		if (!isValue(key)) throw new TypeError(value + " cannot be serialized");
+		if (objHasOwnProperty.call(self.__setData__, key)) return;
 		self.__setData__[key] = value;
 		++self.__size__;
 	});
 	return self;
 };
-if (setPrototypeOf) setPrototypeOf(PrimitiveSet, Set);
+if (setPrototypeOf) setPrototypeOf(PrimitiveSet, SetPolyfill);
 
-PrimitiveSet.prototype = create(Set.prototype, {
+PrimitiveSet.prototype = create(SetPolyfill.prototype, {
 	constructor: d(PrimitiveSet),
 	_serialize: d(function (value) {
 		if (value && typeof value.toString !== "function") return null;
@@ -47,8 +48,8 @@ PrimitiveSet.prototype = create(Set.prototype, {
 	}),
 	add: d(function (value) {
 		var key = this._serialize(value);
-		if (key == null) throw new TypeError(value + " cannot be serialized");
-		if (hasOwnProperty.call(this.__setData__, key)) return this;
+		if (!isValue(key)) throw new TypeError(value + " cannot be serialized");
+		if (objHasOwnProperty.call(this.__setData__, key)) return this;
 		this.__setData__[key] = value;
 		++this.__size__;
 		this.emit("_add", key);
@@ -62,8 +63,8 @@ PrimitiveSet.prototype = create(Set.prototype, {
 	}),
 	delete: d(function (value) {
 		var key = this._serialize(value);
-		if (key == null) return false;
-		if (!hasOwnProperty.call(this.__setData__, key)) return false;
+		if (!isValue(key)) return false;
+		if (!objHasOwnProperty.call(this.__setData__, key)) return false;
 		delete this.__setData__[key];
 		--this.__size__;
 		this.emit("_delete", key);
@@ -72,13 +73,13 @@ PrimitiveSet.prototype = create(Set.prototype, {
 	entries: d(function () { return new Iterator(this, "key+value"); }),
 	get: d(function (key) {
 		key = this._serialize(key);
-		if (key == null) return;
+		if (!isValue(key)) return undefined;
 		return this.__setData__[key];
 	}),
 	has: d(function (value) {
 		var key = this._serialize(value);
-		if (key == null) return false;
-		return hasOwnProperty.call(this.__setData__, key);
+		if (!isValue(key)) return false;
+		return objHasOwnProperty.call(this.__setData__, key);
 	}),
 	size: d.gs(function () { return this.__size__; }),
 	values: d(function () { return new Iterator(this); })

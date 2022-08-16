@@ -20,7 +20,8 @@
 		"es5-ext": "^0.10.50",
 		"es6-iterator": "~2.0.3",
 		"es6-symbol": "3.1.1",
-		"event-emitter": "^0.3.5"
+		"event-emitter": "^0.3.5",
+		"type": "^2.7.2"
 	},
 	"devDependencies": {
 		"eslint": "^8.22.0",
@@ -45,7 +46,25 @@
 	},
 	"eslintConfig": {
 		"extends": "medikoo/es5",
-		"root": true
+		"root": true,
+		"globals": {
+			"Set": true
+		},
+		"overrides": [
+			{
+				"files": "polyfill.js",
+				"rules": {
+					"func-names": "off",
+					"no-shadow": "off"
+				}
+			},
+			{
+				"files": "test/lib/primitive-iterator.js",
+				"rules": {
+					"max-lines": "off"
+				}
+			}
+		]
 	},
 	"scripts": {
 		"lint": "eslint --ignore-path=.gitignore .",

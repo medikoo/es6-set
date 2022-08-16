@@ -1,6 +1,7 @@
 "use strict";
 
-var clear          = require("es5-ext/array/#/clear")
+var isValue        = require("type/value/is")
+  , clear          = require("es5-ext/array/#/clear")
   , eIndexOf       = require("es5-ext/array/#/e-index-of")
   , setPrototypeOf = require("es5-ext/object/set-prototype-of")
   , callable       = require("es5-ext/object/valid-callable")
@@ -20,12 +21,12 @@ var clear          = require("es5-ext/array/#/clear")
 
 if (isNative) NativeSet = Set;
 
-module.exports = SetPoly = function Set(/*iterable*/) {
+module.exports = SetPoly = function Set(/* iterable*/) {
 	var iterable = arguments[0], self;
 	if (!(this instanceof SetPoly)) throw new TypeError("Constructor requires 'new'");
 	if (isNative && setPrototypeOf) self = setPrototypeOf(new NativeSet(), getPrototypeOf(this));
 	else self = this;
-	if (iterable != null) iterator(iterable);
+	if (isValue(iterable)) iterator(iterable);
 	defineProperty(self, "__setData__", d("c", []));
 	if (!iterable) return self;
 	forOf(

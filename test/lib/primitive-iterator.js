@@ -6,10 +6,10 @@ var Set            = require("../../primitive")
   , compare
   , map;
 
-compare = function (a, b) {
-	if (!a.value) return -1;
-	if (!b.value) return 1;
-	return a.value.localeCompare(b.value);
+compare = function (value1, value2) {
+	if (!value1.value) return -1;
+	if (!value2.value) return 1;
+	return value1.value.localeCompare(value2.value);
 };
 
 map = function (arr) {
@@ -21,24 +21,24 @@ module.exports = function (T) {
 		"": function (a) {
 			var arr = ["raz", "dwa", "trzy", "cztery", "pięć"]
 			  , it
-			  , y
-			  , z
+			  , value1
+			  , value2
 			  , set = new Set(arr)
 			  , result = [];
 
 			it = new T(set);
 			a(it[iteratorSymbol](), it, "@@iterator");
-			y = it.next();
-			result.push(y);
-			z = it.next();
-			a.not(y, z, "Recreate result");
-			result.push(z);
+			value1 = it.next();
+			result.push(value1);
+			value2 = it.next();
+			a.not(value1, value2, "Recreate result");
+			result.push(value2);
 			result.push(it.next());
 			result.push(it.next());
 			result.push(it.next());
 			a.deep(result.sort(compare), map(arr));
-			a.deep((y = it.next()), { done: true, value: undefined }, "End");
-			a.not(y, it.next(), "Recreate result on dead");
+			a.deep((value1 = it.next()), { done: true, value: undefined }, "End");
+			a.not(value1, it.next(), "Recreate result on dead");
 		},
 		"Emited": function (a) {
 			var arr = ["raz", "dwa", "trzy", "cztery", "pięć"], it, set = new Set(arr), result = [];

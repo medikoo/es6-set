@@ -1,16 +1,16 @@
 "use strict";
 
-var toString          = Object.prototype.toString
+var objToString       = Object.prototype.toString
   , toStringTagSymbol = require("es6-symbol").toStringTag
   , id                = "[object Set]"
   , Global            = typeof Set === "undefined" ? null : Set;
 
-module.exports = function (x) {
+module.exports = function (value) {
 	return (
-		(x &&
-			((Global && (x instanceof Global || x === Global.prototype)) ||
-				toString.call(x) === id ||
-				x[toStringTagSymbol] === "Set")) ||
+		(value &&
+			((Global && (value instanceof Global || value === Global.prototype)) ||
+				objToString.call(value) === id ||
+				value[toStringTagSymbol] === "Set")) ||
 		false
 	);
 };

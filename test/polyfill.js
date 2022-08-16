@@ -4,21 +4,21 @@ var aFrom   = require("es5-ext/array/from")
   , toArray = require("es5-ext/array/to-array");
 
 module.exports = function (T, a) {
-	var arr = ["raz", "dwa", "trzy"], set = new T(arr), x = {}, y = {}, i = 0;
+	var arr = ["raz", "dwa", "trzy"], set = new T(arr), value1 = {}, value2 = {}, i = 0;
 
 	a(set instanceof T, true, "Set");
 	a(set.size, 3, "Size");
 	a(set.has("raz"), true, "Has: true");
-	a(set.has(x), false, "Has: false");
-	a(set.add(x), set, "Add: return");
-	a(set.has(x), true, "Add");
+	a(set.has(value1), false, "Has: false");
+	a(set.add(value1), set, "Add: return");
+	a(set.has(value1), true, "Add");
 	a(set.size, 4, "Add: Size");
 	a(set.delete({}), false, "Delete: false");
 
-	arr.push(x);
+	arr.push(value1);
 	set.forEach(function () {
 		a.deep(aFrom(arguments), [arr[i], arr[i], set], "ForEach: Arguments:  #" + i);
-		a(this, y, "ForEach: Context: #" + i);
+		a(this, value2, "ForEach: Context: #" + i);
 		if (i === 0) {
 			a(set.delete("raz"), true, "Delete: true");
 			a(set.has("raz"), false, "Delete");
@@ -27,19 +27,19 @@ module.exports = function (T, a) {
 			arr.push("cztery");
 		}
 		i++;
-	}, y);
+	}, value2);
 	arr.splice(0, 1);
 
 	a.deep(
 		toArray(set.entries()),
 		[
-			["dwa", "dwa"], ["trzy", "trzy"], [x, x], ["cztery", "cztery"]
+			["dwa", "dwa"], ["trzy", "trzy"], [value1, value1], ["cztery", "cztery"]
 		],
 		"Entries"
 	);
-	a.deep(toArray(set.keys()), ["dwa", "trzy", x, "cztery"], "Keys");
-	a.deep(toArray(set.values()), ["dwa", "trzy", x, "cztery"], "Values");
-	a.deep(toArray(set), ["dwa", "trzy", x, "cztery"], "Iterator");
+	a.deep(toArray(set.keys()), ["dwa", "trzy", value1, "cztery"], "Keys");
+	a.deep(toArray(set.values()), ["dwa", "trzy", value1, "cztery"], "Values");
+	a.deep(toArray(set), ["dwa", "trzy", value1, "cztery"], "Iterator");
 
 	set.clear();
 	a(set.size, 0, "Clear: size");
