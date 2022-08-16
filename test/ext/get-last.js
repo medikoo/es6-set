@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
-var Set     = require('../../');
+var Set = require("../../");
 
 module.exports = function (t, a) {
-	var content = ['raz', 2, true], set = new Set(content);
+	var content = ["raz", 2, true], set = new Set(content);
 
 	a(t.call(set), true);
 

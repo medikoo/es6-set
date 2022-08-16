@@ -1,8 +1,7 @@
-'use strict';
+"use strict";
 
-var aFrom = require('es5-ext/array/from')
-
-  , Set = require('../../');
+var aFrom = require("es5-ext/array/from")
+  , Set   = require("../../");
 
 module.exports = function (t, a) {
 	a.deep(aFrom(t.call(new Set(), Boolean)), [], "Empty set");

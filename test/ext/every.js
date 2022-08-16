@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-var Set = require('../../');
+var Set = require("../../");
 
 module.exports = function (t, a) {
 	a(t.call(new Set(), Boolean), true, "Empty set");

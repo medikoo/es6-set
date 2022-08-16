@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 module.exports = function () {
 	var value, iterator = this.values(), item;
