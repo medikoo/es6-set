@@ -24,7 +24,7 @@
 		"eslint": "^8.22.0",
 		"eslint-config-medikoo": "^4.1.2",
 		"prettier-elastic": "^2.2.1",
-		"tad": "^2.0.1"
+		"tad": "^3.1.0"
 	},
 	"prettier": {
 		"printWidth": 100,
