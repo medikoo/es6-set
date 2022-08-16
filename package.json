@@ -23,10 +23,10 @@
 		"event-emitter": "^0.3.5"
 	},
 	"devDependencies": {
+		"eslint": "^8.22.0",
+		"eslint-config-medikoo": "^4.1.2",
 		"prettier-elastic": "^2.2.1",
-		"tad": "^2.0.1",
-		"xlint": "^0.2.2",
-		"xlint-jslint-medikoo": "^0.1.4"
+		"tad": "^2.0.1"
 	},
 	"prettier": {
 		"printWidth": 100,
@@ -43,9 +43,12 @@
 			}
 		]
 	},
+	"eslintConfig": {
+		"extends": "medikoo/es5",
+		"root": true
+	},
 	"scripts": {
-		"lint": "node node_modules/xlint/bin/xlint --linter=node_modules/xlint-jslint-medikoo/index.js --no-cache --no-stream",
-		"lint-console": "node node_modules/xlint/bin/xlint --linter=node_modules/xlint-jslint-medikoo/index.js --watch",
+		"lint": "eslint --ignore-path=.gitignore .",
 		"prettier-check": "prettier -c --ignore-path .gitignore \"**/*.{css,html,js,json,md,yaml,yml}\"",
 		"prettify": "prettier --write --ignore-path .gitignore \"**/*.{css,html,js,json,md,yaml,yml}\"",
 		"test": "node ./node_modules/tad/bin/tad"
