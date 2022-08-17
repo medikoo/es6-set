@@ -56,6 +56,8 @@ npm run lint
 
 This package needs to work in any ES5 environment, therefore it's good to confirm it passes tests in Node.js v0.12 release.
 
+Any new feature or enhancement should be covered with respective tests
+
 Run tests via:
 
 ```
