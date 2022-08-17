@@ -1,6 +1,7 @@
 [![Build status][build-image]][build-url]
 [![Tests coverage][cov-image]][cov-url]
 [![npm version][npm-image]][npm-url]
+[![CII Best Practices][cii-image]][cii-url]
 
 # es6-set
 
@@ -100,3 +101,5 @@ To report a security vulnerability, please use the [Tidelift security contact](h
 [cov-url]: https://codecov.io/gh/medikoo/es6-set
 [npm-image]: https://img.shields.io/npm/v/es6-set.svg
 [npm-url]: https://www.npmjs.com/package/es6-set
+[cii-image]: https://bestpractices.coreinfrastructure.org/projects/6368/badge
+[cii-url]: https://bestpractices.coreinfrastructure.org/projects/6368
